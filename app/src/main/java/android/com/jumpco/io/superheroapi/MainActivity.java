@@ -1,14 +1,202 @@
 package android.com.jumpco.io.superheroapi;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
+import android.app.ProgressDialog;
+import android.com.jumpco.io.superheroapi.adapters.SuperheroAdapter;
+import android.com.jumpco.io.superheroapi.adapters.SuperheroListAdapter;
+import android.com.jumpco.io.superheroapi.interfaces.Api2;
+import android.com.jumpco.io.superheroapi.interfaces.RetroFitHelper;
+import android.com.jumpco.io.superheroapi.pojo.Results;
+import android.com.jumpco.io.superheroapi.pojo.RetrofitClient;
+import android.com.jumpco.io.superheroapi.pojo.SuperheroPojo;
+import android.content.Context;
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
+
+public class MainActivity extends AppCompatActivity  {
+
+    public static String BaseUrl = "https://superheroapi.com/api/4278893445508338/";
+    public static String AppId = "4278893445508338";
+    public static  int ID = 245;
+    //https://superheroapi.com/api/4278893445508338/245
+
+    //tut
+    ListView superListView;
+
+    //superhero using jsoup
+    ArrayList<SuperheroPojo> superHeros;
+    RecyclerView recyclerView;
+    ProgressDialog progressDialog;
+    String url = "https://superheroapi.com/ids.html";
+    ArrayList<SuperheroPojo> idList = new ArrayList<>();
+    public SuperheroListAdapter adapter;
+    public SuperheroAdapter adapter2;
+    public Context context;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //tut
+        context = this;
+
+        superListView = findViewById(R.id.superListView);
+
+        superListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                //get superhero and pass intent
+                Toast.makeText(MainActivity.this, "" + position, Toast.LENGTH_SHORT).show();
+                Intent n = new Intent(getApplicationContext(), SuperheroProfileActivity.class);
+                n.putExtra("id", position);
+                startActivity(n);
+                Toast.makeText(getApplicationContext(), "HERO #"+position, Toast.LENGTH_SHORT).show();            }
+        });
+
+        //Lookup the recycler in activity
+     //   recyclerView = (RecyclerView) findViewById(R.id.rvSuperHero);
+
+        new ListOfSuperoTask ().execute();
+
+
     }
+
+    //tut
+    private void getSuperHeroes() {
+        Call<List<Results>> call = RetrofitClient.getInstance().getMyApi().getsuperHeroes();
+        //     Call<List<Results>> call = RetrofitClient.getInstance().getMyApi().getsuperHeroes2(ID);
+
+        call.enqueue(new Callback<List<Results>>() {
+            @Override
+            public void onResponse(Call<List<Results>> call, Response<List<Results>> response) {
+                List<Results> myheroList = response.body();
+                String[] oneHeroes = new String[myheroList.size()];
+
+                for (int i = 0; i < myheroList.size(); i++) {
+                    oneHeroes[i] = myheroList.get(i).superName;
+                }
+
+                //      superListView.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, oneHeroes));
+            }
+
+            @Override
+            public void onFailure(Call<List<Results>> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "An error has occured "+t.toString(), Toast.LENGTH_LONG).show();
+                System.out.println("Error  "+t.toString());
+            }
+
+        });
+    }
+
+    private class ListOfSuperoTask extends AsyncTask<String,String,String> {
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog = new ProgressDialog(MainActivity.this);
+            progressDialog.setTitle("Loading...");
+            progressDialog.show();
+
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            Document document = null;
+
+
+            try {
+                //connect to website
+                document = Jsoup.connect(url).get();
+
+                //get title of the website
+              //  title = document.title();
+
+               //select table first
+                org.jsoup.nodes.Element table = document.select("table").get(0);
+
+                Iterator<Element> row = table.select("tr").iterator();
+                row.next(); //Skipping the <th>
+
+                while (row.hasNext()) {
+                    Iterator<org.jsoup.nodes.Element> ite = ((org.jsoup.nodes.Element) row.next()).select("td").iterator();
+                    SuperheroPojo pojo = new SuperheroPojo();
+                    pojo.superHeroID = ite.next().text();
+                    pojo.superHeroName = ite.next().text();
+                    idList.add(pojo);
+
+                }
+                org.jsoup.nodes.Element table2 = document.select("table").get(1);//select table first
+                Iterator<org.jsoup.nodes.Element> row2 = table2.select("tr").iterator();
+                row2.next(); //Skipping the <th>
+
+                while (row2.hasNext()) {
+                    Iterator<org.jsoup.nodes.Element> ite = ((org.jsoup.nodes.Element) row2.next()).select("td").iterator();
+                    SuperheroPojo pojo = new SuperheroPojo();
+                    pojo.superHeroID = ite.next().text();
+                    pojo.superHeroName = ite.next().text();
+                    idList.add(pojo);
+
+                }
+                org.jsoup.nodes.Element table3 = document.select("table").get(2);//select table first
+                Iterator<org.jsoup.nodes.Element> row3 = table3.select("tr").iterator();
+                row3.next(); //Skipping the <th>
+
+                while (row3.hasNext()) {
+                    Iterator<org.jsoup.nodes.Element> ite = ((org.jsoup.nodes.Element) row3.next()).select("td").iterator();
+                    SuperheroPojo pojo = new SuperheroPojo();
+                    pojo.superHeroID = ite.next().text();
+                    pojo.superHeroName = ite.next().text();
+                    idList.add(pojo);
+
+                }
+            //    adapter = new SuperheroListAdapter(idList);
+                adapter2 = new SuperheroAdapter(context,idList);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+            return null;
+        }
+        @Override
+        protected void onPostExecute(String results) {
+            super.onPostExecute(results);
+            System.out.println(" results == "+results);
+            progressDialog.dismiss();
+//            textView.setText(title);
+            superListView.setAdapter(adapter2);
+
+        }
+    }
+
+
+
 }
