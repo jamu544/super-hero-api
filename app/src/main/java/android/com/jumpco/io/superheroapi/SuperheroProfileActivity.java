@@ -19,9 +19,10 @@ public class SuperheroProfileActivity extends AppCompatActivity  {
 
 
     ImageView profileimage;
-    TextView nameTextView,powerstatsTextView,
-            biographyTextView,appearanceTextView,
-            workTextView,connectionsTextView;
+    TextView nameTextView,intelligenceTextView,
+            strengthTexView,speedTextView,
+            durabilityTextView,powerTextView,
+            combatTextView;
 
     //testing two
 
@@ -43,11 +44,13 @@ public class SuperheroProfileActivity extends AppCompatActivity  {
     private void init(){
         profileimage=(ImageView)findViewById(R.id.profile_image);
         nameTextView =(TextView)findViewById(R.id.nameID);
-        powerstatsTextView=(TextView)findViewById(R.id.powerstatsID);
-//        biographyTextView=(TextView)findViewById(R.id.biographyID);
-//        appearanceTextView=(TextView)findViewById(R.id.appearanceID);
-//        workTextView=(TextView)findViewById(R.id.workID);
-//        connectionsTextView=(TextView)findViewById(R.id.connectionsID);
+        intelligenceTextView=(TextView)findViewById(R.id.intelligence_id);
+        strengthTexView=(TextView)findViewById(R.id.strength_id);
+        speedTextView=(TextView)findViewById(R.id.speed_id);
+        durabilityTextView=(TextView)findViewById(R.id.durability_id);
+        powerTextView=(TextView)findViewById(R.id.power_id);
+        combatTextView=(TextView)findViewById(R.id.combat_id);
+
     }
 
     // get response from the server...get id from listview
@@ -77,11 +80,13 @@ public class SuperheroProfileActivity extends AppCompatActivity  {
 
                 Toast.makeText(context," The word is: " + resultName ,Toast.LENGTH_LONG).show();
 
-                     nameTextView.setText(resultName);
-                    powerstatsTextView.setText(response.body().powerStats.intelligence+" "+response.body().powerStats.strength
-                    +" "+response.body().powerStats.speed+" "+response.body().powerStats.durability+"  " +
-                            ""+response.body().powerStats.power+"  "+
-                            response.body().powerStats.combat );
+                    nameTextView.setText(resultName);
+                    intelligenceTextView.setText("intelligence "+response.body().powerStats.intelligence);
+                    strengthTexView.setText("strength "+response.body().powerStats.strength);
+                    speedTextView.setText("speed "+response.body().powerStats.speed);
+                    durabilityTextView.setText(" durability "+response.body().powerStats.durability);
+                    powerTextView.setText("power "+response.body().powerStats.power);
+                    combatTextView.setText("combat "+response.body().powerStats.combat );
 
 //                    biographyTextView.setText(biography);
 //                    appearanceTextView.setText(appearance);
