@@ -10,7 +10,11 @@
 
 
 
-        <color name="colorPrimary">#AA00FF</color>
+    <color name="alias_name_color">#FF0000</color>
+
+
+
+    <color name="colorPrimary">#AA00FF</color>
         <color name="colorPrimaryDark">#130B18</color>
         <color name="colorAccent">#D81B60</color>
         <color name="colorWhite">#FFFFFF</color>

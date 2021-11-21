@@ -15,19 +15,27 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+
 public class SuperheroProfileActivity extends AppCompatActivity  {
 
 
     ImageView profileimage;
-    TextView nameTextView,intelligenceTextView,
-            strengthTexView,speedTextView,
-            durabilityTextView,powerTextView,
-            combatTextView;
+    TextView nameTextView,biographyTextView,fullNameTextView,
+            placeOfBirthTextView,appearanceTextView,
+            publisherTextView,alignmentTextView,occupationTextTView,groupAffiliationTextTview,relativesTextView;
 
-    //testing two
 
     public String URL = "https://superheroapi.com/api/4278893445508338/";
     public Context context;
+
+    // object === biography
+    //-full name,place of birth,first appearance,publisher,alignment,
+    // object === work
+    // -occupation
+    // object === connections
+    // -group affilation
+    // - object === image
 
 
 
@@ -38,19 +46,25 @@ public class SuperheroProfileActivity extends AppCompatActivity  {
         setContentView(R.layout.content_main);
         context = this;
         init();
+        profileimage=(ImageView)findViewById(R.id.profile_image);
+
+        Glide.with(context)
+                .load("https://www.superherodb.com/pictures2/portraits/10/100/1392.jpg")
+                .into(profileimage);
         getCurrentHeroInfo();
     }
     // initailize widgets
     private void init(){
-        profileimage=(ImageView)findViewById(R.id.profile_image);
         nameTextView =(TextView)findViewById(R.id.nameID);
-        intelligenceTextView=(TextView)findViewById(R.id.intelligence_id);
-        strengthTexView=(TextView)findViewById(R.id.strength_id);
-        speedTextView=(TextView)findViewById(R.id.speed_id);
-        durabilityTextView=(TextView)findViewById(R.id.durability_id);
-        powerTextView=(TextView)findViewById(R.id.power_id);
-        combatTextView=(TextView)findViewById(R.id.combat_id);
-
+        biographyTextView =(TextView)findViewById(R.id.biography_id);
+        fullNameTextView = (TextView) findViewById(R.id.fullName_id);
+        placeOfBirthTextView = (TextView) findViewById(R.id.placeOfBirth_id);
+        appearanceTextView = (TextView) findViewById(R.id.firstAppearance_id);
+        publisherTextView = (TextView) findViewById(R.id.publisher_id);
+        alignmentTextView = (TextView) findViewById(R.id.alignment_id);
+        occupationTextTView = (TextView) findViewById(R.id.occupation_id);
+        groupAffiliationTextTview = (TextView) findViewById(R.id.groupAffiliation_id);
+        relativesTextView = (TextView) findViewById(R.id.relatives_id);
     }
 
     // get response from the server...get id from listview
@@ -62,18 +76,10 @@ public class SuperheroProfileActivity extends AppCompatActivity  {
         Retrofit retrofit = builder.build();
 
         RetroFitHelper client = retrofit.create(RetroFitHelper.class);
-        Call<Api2> call = client.findSuperhero("150");
+        Call<Api2> call = client.findSuperhero("550");
 
         call.enqueue(new Callback<Api2>() {
-            /**
-             * Invoked for a received HTTP response.
-             * <p>
-             * Note: An HTTP response may still indicate an application-level failure such as a 404 or 500.
-             * Call {@link Response#isSuccessful()} to determine if the response indicates success.
-             *
-             * @param call
-             * @param response
-             */
+
             @Override
             public void onResponse(Call<Api2> call, Response<Api2> response) {
                 String resultName = response.body().name;
@@ -81,34 +87,24 @@ public class SuperheroProfileActivity extends AppCompatActivity  {
                 Toast.makeText(context," The word is: " + resultName ,Toast.LENGTH_LONG).show();
 
                     nameTextView.setText(resultName);
-                    intelligenceTextView.setText("intelligence "+response.body().powerStats.intelligence);
-                    strengthTexView.setText("strength "+response.body().powerStats.strength);
-                    speedTextView.setText("speed "+response.body().powerStats.speed);
-                    durabilityTextView.setText(" durability "+response.body().powerStats.durability);
-                    powerTextView.setText("power "+response.body().powerStats.power);
-                    combatTextView.setText("combat "+response.body().powerStats.combat );
+                    fullNameTextView.setText(response.body().biography.fullName);
+                    placeOfBirthTextView.setText(response.body().biography.placeOfBirth);
+                    appearanceTextView.setText(response.body().biography.firstAppearance);
+                    publisherTextView.setText(response.body().biography.publisher);
+                    alignmentTextView.setText(response.body().biography.alignment);
+                    occupationTextTView.setText(response.body().work.occupation);
+                    groupAffiliationTextTview.setText(response.body().connections.groupAffiliation);
+                    relativesTextView.setText(response.body().connections.relatives);
 
-//                    biographyTextView.setText(biography);
-//                    appearanceTextView.setText(appearance);
-//                    workTextView.setText(work);
-//                    connectionsTextView.setText(connections);
+
             }
 
-            /**
-             * Invoked when a network exception occurred talking to the server or when an unexpected
-             * exception occurred creating the request or processing the response.
-             *
-             * @param call
-             * @param t
-             */
+
             @Override
             public void onFailure(Call<Api2> call, Throwable t) {
                 Toast.makeText(context," Error..." ,Toast.LENGTH_LONG).show();
                 System.out.println("Error "+ t.getMessage());
-
             }
-
-
         });
 
 

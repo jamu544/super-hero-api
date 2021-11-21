@@ -22,7 +22,10 @@ public interface Api {
     @GET("id")
 //    Call<Results> getCurrentSuperheroDataInfo();
 //    Call<Results> getCurrentSuperheroData();
-//
+
+
+
+    // get selected id from query
     Call<Results> getCurrentSuperheroDataInfo(@Query("id") int id);
 //    Call<List<Results>> getsuperHeroes2(@Query("name") String name);
 
