@@ -40,6 +40,11 @@ public class Api2 {
     @Expose
     public Connections connections;
 
+    //connections
+    @SerializedName("image")
+    @Expose
+    public Image image;
+
 
     public class PowerStats{
         @SerializedName("intelligence")
@@ -97,6 +102,11 @@ public class Api2 {
         public String groupAffiliation;
         @SerializedName("relatives")
         public String relatives;
+    }
+
+    public class Image {
+        @SerializedName("url")
+        public String url;
     }
 
 

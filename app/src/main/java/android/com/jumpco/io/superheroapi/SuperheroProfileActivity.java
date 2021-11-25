@@ -20,8 +20,8 @@ import com.bumptech.glide.Glide;
 public class SuperheroProfileActivity extends AppCompatActivity  {
 
 
-    ImageView profileimage;
-    TextView nameTextView,biographyTextView,fullNameTextView,
+    private ImageView profileimage;
+    private TextView nameTextView,biographyTextView,fullNameTextView,
             placeOfBirthTextView,appearanceTextView,
             publisherTextView,alignmentTextView,occupationTextTView,groupAffiliationTextTview,relativesTextView;
 
@@ -29,32 +29,17 @@ public class SuperheroProfileActivity extends AppCompatActivity  {
     public String URL = "https://superheroapi.com/api/4278893445508338/";
     public Context context;
 
-    // object === biography
-    //-full name,place of birth,first appearance,publisher,alignment,
-    // object === work
-    // -occupation
-    // object === connections
-    // -group affilation
-    // - object === image
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_main);
         context = this;
         init();
-        profileimage=(ImageView)findViewById(R.id.profile_image);
-
-        Glide.with(context)
-                .load("https://www.superherodb.com/pictures2/portraits/10/100/1392.jpg")
-                .into(profileimage);
         getCurrentHeroInfo();
     }
     // initailize widgets
     private void init(){
+        profileimage=(ImageView)findViewById(R.id.profilePhoto);
         nameTextView =(TextView)findViewById(R.id.nameID);
         biographyTextView =(TextView)findViewById(R.id.biography_id);
         fullNameTextView = (TextView) findViewById(R.id.fullName_id);
@@ -95,6 +80,14 @@ public class SuperheroProfileActivity extends AppCompatActivity  {
                     occupationTextTView.setText(response.body().work.occupation);
                     groupAffiliationTextTview.setText(response.body().connections.groupAffiliation);
                     relativesTextView.setText(response.body().connections.relatives);
+
+
+                   Glide.with(context)
+                  .load(response.body().image.url)
+                  .into(profileimage);
+
+
+                    System.out.println("Image response === "+response.body().image.url.toString());
 
 
             }
