@@ -12,6 +12,23 @@
         tools:context=".MainActivity"
         android:gravity="center"
         android:orientation="vertical">
+        <EditText
+            android:id="@+id/search_hero_id"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:inputType="text"
+            android:hint="search for a hero"
+            />
+        <Button
+            android:id="@+id/button_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="SEARCH"
+            android:textColor="@color/purple_200"
+            />
+
+
      <androidx.cardview.widget.CardView
          app:cardElevation="10dp"
          android:id="@+id/image_card"
@@ -62,7 +79,7 @@
          android:layout_below="@id/image_card"
          android:layout_marginTop="20dp"
          android:layout_marginBottom="40dp"
-         app:cardBackgroundColor="@color/purple_700"
+         app:cardBackgroundColor="@color/alias_name_color"
        >
          <LinearLayout
              android:layout_width="match_parent"
