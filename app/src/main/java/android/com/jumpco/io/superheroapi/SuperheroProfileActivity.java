@@ -12,6 +12,8 @@ import android.app.ProgressDialog;
 import android.com.jumpco.io.superheroapi.interfaces.Api2;
 import android.com.jumpco.io.superheroapi.interfaces.RetroFitHelper;
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -47,12 +49,23 @@ public class SuperheroProfileActivity extends AppCompatActivity  implements View
     public String URL = "https://superheroapi.com/api/4278893445508338/";
     public Context context;
 
+
+    private static final String TAG = "SuperheroProfileActvty";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_main);
         context = this;
+        Log.d(TAG,"On Create" );
         init();
+
+//        Log.e("ApiUrl = ", "MyApiUrl") (error)
+//                Log.w("ApiUrl = ", "MyApiUrl") (warning)
+//                Log.i("ApiUrl = ", "MyApiUrl") (information)
+//                Log.d("ApiUrl = ", "MyApiUrl") (debug)
+//                Log.v("ApiUrl = ", "MyApiUrl") (verbose)
     }
     // initailize widgets
     private void init(){
@@ -71,6 +84,8 @@ public class SuperheroProfileActivity extends AppCompatActivity  implements View
         searchButton.setOnClickListener(this);
         searchHero = (EditText) findViewById(R.id.search_hero_id);
         searchHero.addTextChangedListener(this);
+        Log.d(TAG,"On Create - init" );
+
 
     }
 
@@ -112,12 +127,11 @@ public class SuperheroProfileActivity extends AppCompatActivity  implements View
                     relativesTextView.setText(response.body().connections.relatives);
 
 
-                   Glide.with(context)
-                  .load(response.body().image.url)
-                  .into(profileimage);
+                   Glide.with(context).load(response.body().image.url).into(profileimage);
 
 
-                    System.out.println("Image response === "+response.body().image.url.toString());
+                   // System.out.println("Image response === "+response.body().image.url.toString());
+                    Log.d("Image response", response.body().image.url.toString());
                    progressDialog.dismiss();
 
             }
@@ -126,7 +140,8 @@ public class SuperheroProfileActivity extends AppCompatActivity  implements View
             @Override
             public void onFailure(Call<Api2> call, Throwable t) {
                 Toast.makeText(context," Error..." ,Toast.LENGTH_LONG).show();
-                System.out.println("Error "+ t.getMessage());
+
+                Log.e("Error", t.getMessage());
             }
         });
 
@@ -168,8 +183,14 @@ public class SuperheroProfileActivity extends AppCompatActivity  implements View
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.button_id:
+                if(checkInternetConnectivity()) {
+                    getCurrentHeroInfo(name);
+                    Log.i("Info log", "Search Button Clicked");
+                }
+                else {
+                    Log.w(TAG, "No Internet connection!!!");
+                }
 
-                getCurrentHeroInfo(name);
             default:
                 break;
         }
@@ -189,5 +210,23 @@ public class SuperheroProfileActivity extends AppCompatActivity  implements View
     public void afterTextChanged(Editable editable) {
 
         name = editable.toString();
+    }
+
+    //check internet connection for both MOBILE and WIFI
+    private boolean checkInternetConnectivity(){
+        boolean haveConnectionWifi = false;
+        boolean haveConnectedMobile = false;
+        ConnectivityManager cm =((ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE));
+        NetworkInfo[] networkInfos = cm.getAllNetworkInfo();
+
+        for (NetworkInfo in : networkInfos){
+            if(in.getTypeName().equalsIgnoreCase("WIFI"))
+                if(in.isConnected())
+                    haveConnectionWifi = true;
+            if(in.getTypeName().equalsIgnoreCase("MOBILE"))
+                if(in.isConnected())
+                    haveConnectedMobile = true;
+        }
+        return haveConnectionWifi || haveConnectedMobile;
     }
 }
