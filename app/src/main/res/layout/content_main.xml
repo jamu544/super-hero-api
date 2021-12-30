@@ -17,7 +17,7 @@
             android:layout_width="300dp"
             android:layout_height="40dp"
             android:inputType="text"
-            android:hint="search for a hero"
+            android:hint="@string/search_for_comics"
             />
         <Button
             android:id="@+id/button_id"
@@ -34,9 +34,10 @@
          android:id="@+id/image_card"
          app:cardBackgroundColor="@color/alias_name_color"
          app:cardCornerRadius="15dp"
-         android:layout_width="wrap_content"
+         android:layout_width="match_parent"
          android:layout_height="wrap_content"
          android:layout_centerHorizontal="true"
+
          >
          <LinearLayout
              android:layout_width="match_parent"
@@ -47,22 +48,23 @@
      <ImageView
         android:id="@+id/profilePhoto"
         android:layout_marginTop="24dp"
-        android:layout_width="200dp"
+        android:layout_width="match_parent"
         android:layout_height="200dp"
         android:background="#999"
         android:src="@drawable/batman_ben_affleck"
         />
+
              <TextView
                  android:id="@+id/nameID"
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
-                 android:text="Batman"
                  android:layout_gravity="bottom|center_horizontal"
                  android:layout_marginTop="20dp"
                  android:layout_marginBottom="20dp"
-                 android:textSize="32sp"
+                 android:fontFamily="@font/allerta"
+                 android:text="Batman"
                  android:textColor="@color/colorBackground"
-                 android:textStyle="bold"
+                 android:textSize="32sp"
                  />
          </LinearLayout>
 
@@ -86,23 +88,24 @@
              android:orientation="vertical"
              android:layout_margin="20dp"
              android:layout_height="match_parent">
+
              <TextView
                  android:id="@+id/biography_id"
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
+                 android:fontFamily="@font/lateef"
+                 android:textSize="20dp"
                  android:text="biography"
-                 android:textStyle="bold"
-                 android:textColor="@color/colorSecondaryText"
-                 />
+                 android:textColor="#000000" />
 
              <TextView
                  android:id="@+id/fullName_id"
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
+                 android:fontFamily="@font/anton"
                  android:text="Odwa Menziwa"
                  android:textColor="@color/colorBackground"
-                 android:textSize="20sp"
-                 />
+                 android:textSize="20sp" />
              <TextView
                  android:id="@+id/placeOfBirth_id"
                  android:layout_width="wrap_content"
@@ -136,8 +139,9 @@
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
                  android:text="work"
-                 android:textStyle="bold"
-                 android:textColor="@color/colorSecondaryText"
+                 android:fontFamily="@font/lateef"
+                 android:textSize="20dp"
+                 android:textColor="#000000"
                  />
              <TextView
                  android:id="@+id/occupation_id"
@@ -152,8 +156,9 @@
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
                  android:text="connections"
-                 android:textStyle="bold"
-                 android:textColor="@color/colorSecondaryText"
+                 android:fontFamily="@font/lateef"
+                 android:textSize="20dp"
+                 android:textColor="#000000"
                  />
 
              <TextView

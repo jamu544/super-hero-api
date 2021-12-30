@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">SuperheroAPI</string>
+    <string name="app_name">Superhero-API</string>
+    <string name="search_for_comics">search for a Marvel or DC comic: </string>
 </resources>
