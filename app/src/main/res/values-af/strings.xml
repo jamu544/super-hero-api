@@ -2,4 +2,6 @@
 <resources>
     <string name="app_name">Superheld-Api</string>
     <string name="search_for_comics">soek \'n wonder- of dc-strokiesprent:</string>
+    <string name="search">SOEK</string>
+
 </resources>

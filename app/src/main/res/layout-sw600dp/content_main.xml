@@ -1,43 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:paddingTop="20dp"
-    android:layout_height="match_parent">
+    android:orientation="vertical"
+    >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".MainActivity"
-        android:gravity="center"
-        android:orientation="vertical">
+
         <EditText
             android:id="@+id/search_hero_id"
             android:layout_width="300dp"
             android:layout_height="40dp"
             android:inputType="text"
             android:hint="@string/search_for_comics"
+
             />
         <Button
             android:id="@+id/button_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="@string/search"
+            android:text="SEARCH"
             android:textColor="@color/purple_200"
+
             />
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:weightSum="4"
+        >
      <androidx.cardview.widget.CardView
          app:cardElevation="10dp"
          android:id="@+id/image_card"
          app:cardBackgroundColor="@color/alias_name_color"
          app:cardCornerRadius="15dp"
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:layout_centerHorizontal="true"
-
+         android:layout_width="600dp"
+         android:layout_height="400dp"
+         android:layout_weight="1"
          >
          <LinearLayout
              android:layout_width="match_parent"
@@ -57,42 +69,47 @@
                  android:id="@+id/nameID"
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
-                 android:layout_gravity="bottom|center_horizontal"
+                 android:layout_gravity="center_horizontal"
                  android:layout_marginTop="20dp"
                  android:layout_marginBottom="20dp"
                  android:fontFamily="@font/allerta"
+                 android:text="Batman"
                  android:textColor="@color/colorBackground"
                  android:textSize="32sp"
                  />
          </LinearLayout>
 
      </androidx.cardview.widget.CardView>
+    </LinearLayout>
 
-     <androidx.cardview.widget.CardView
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            android:weightSum="4">
+
+        <androidx.cardview.widget.CardView
          android:id="@+id/biography2_card"
-         android:layout_width="wrap_content"
-         android:layout_height="match_parent"
-         android:layout_marginStart="20dp"
+         android:layout_width="600dp"
+         android:layout_height="wrap_content"
+         android:layout_marginRight="8dp"
+         android:layout_weight="1"
          android:layout_marginEnd="20dp"
          app:cardCornerRadius="8dp"
-         android:layout_alignParentBottom="true"
-         android:layout_below="@id/image_card"
-         android:layout_marginTop="20dp"
-         android:layout_marginBottom="40dp"
-         app:cardBackgroundColor="@color/alias_name_color"
-       >
+         app:cardBackgroundColor="@color/alias_name_color">
+
          <LinearLayout
              android:layout_width="match_parent"
              android:orientation="vertical"
-             android:layout_margin="20dp"
-             android:layout_height="match_parent">
+             android:layout_height="wrap_content">
 
              <TextView
                  android:id="@+id/biography_id"
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
                  android:fontFamily="@font/lateef"
-                 android:textSize="20sp"
+                 android:textSize="20dp"
                  android:text="biography"
                  android:textColor="#000000" />
 
@@ -101,6 +118,7 @@
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
                  android:fontFamily="@font/anton"
+                 android:text="Odwa Menziwa"
                  android:textColor="@color/colorBackground"
                  android:textSize="20sp" />
              <TextView
@@ -108,39 +126,44 @@
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
                  android:textColor="@color/colorBackground"
+                 android:text="30 November 1989"
                  />
              <TextView
                  android:id="@+id/firstAppearance_id"
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
                  android:textColor="@color/colorBackground"
+                 android:text="appearance "
                  />
              <TextView
                  android:id="@+id/publisher_id"
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
                  android:textColor="@color/colorBackground"
+                 android:text=" DC or Marvel"
                  />
              <TextView
                  android:id="@+id/alignment_id"
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
                  android:textColor="@color/colorBackground"
+                 android:text="with a friend"
                  />
              <TextView
                  android:id="@+id/work_id"
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
                  android:fontFamily="@font/lateef"
-                 android:textSize="20sp"
+                 android:textSize="20dp"
                  android:textColor="#000000"
-                 android:text="work"
+                 android:text=" Contract worker"
                  />
              <TextView
                  android:id="@+id/occupation_id"
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
                  android:textColor="@color/colorBackground"
+                 android:text=" Conflicated "
                  />
 
              <TextView
@@ -148,9 +171,9 @@
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
                  android:fontFamily="@font/lateef"
-                 android:textSize="20sp"
+                 android:textSize="20dp"
                  android:textColor="#000000"
-                 android:text="connections"
+                 android:text=" DC or Marvel connection"
                  />
 
              <TextView
@@ -158,6 +181,7 @@
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
                  android:textColor="@color/colorBackground"
+                 android:text=" Group affiliation"
                  />
 
              <TextView
@@ -165,6 +189,7 @@
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
                  android:textColor="@color/colorBackground"
+                 android:text=" Captain or Superman"
                  />
 
 
@@ -172,10 +197,6 @@
 
      </androidx.cardview.widget.CardView>
 
-
-
-
-
-
+       </LinearLayout>
     </LinearLayout>
-</ScrollView>
+</LinearLayout>

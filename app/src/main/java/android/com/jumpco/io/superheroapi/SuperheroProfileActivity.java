@@ -30,6 +30,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.Locale;
 
@@ -112,8 +113,9 @@ public class SuperheroProfileActivity extends AppCompatActivity  implements View
 
             @Override
             public void onResponse(Call<Api2> call, Response<Api2> response) {
-                String resultName = response.body().name;
 
+
+                String resultName = response.body().name;
                 Toast.makeText(context," The word is: " + resultName ,Toast.LENGTH_LONG).show();
 
                     nameTextView.setText(resultName);
@@ -127,11 +129,12 @@ public class SuperheroProfileActivity extends AppCompatActivity  implements View
                     relativesTextView.setText(response.body().connections.relatives);
 
 
-                   Glide.with(context).load(response.body().image.url).into(profileimage);
+                   Glide.with(context)
+                        .load(response.body().image.url)
+                        .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                        .into(profileimage);
 
-
-                   // System.out.println("Image response === "+response.body().image.url.toString());
-                    Log.d("Image response", response.body().image.url.toString());
+                   Log.d("Image response", response.body().image.url.toString());
                    progressDialog.dismiss();
 
             }
