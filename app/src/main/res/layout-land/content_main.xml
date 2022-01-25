@@ -63,6 +63,7 @@
                  android:fontFamily="@font/allerta"
                  android:textColor="@color/colorBackground"
                  android:textSize="32sp"
+
                  />
          </LinearLayout>
 
@@ -91,9 +92,9 @@
                  android:id="@+id/biography_id"
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
-                 android:fontFamily="@font/lateef"
-                 android:textSize="20sp"
-                 android:text="biography"
+                 android:fontFamily="@font/anton"
+                 android:textSize="50sp"
+                 android:text="Biography"
                  android:textColor="#000000" />
 
              <TextView
@@ -108,24 +109,28 @@
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
                  android:textColor="@color/colorBackground"
+                 android:textSize="20sp"
                  />
              <TextView
                  android:id="@+id/firstAppearance_id"
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
                  android:textColor="@color/colorBackground"
+                 android:textSize="20sp"
                  />
              <TextView
                  android:id="@+id/publisher_id"
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
                  android:textColor="@color/colorBackground"
+                 android:textSize="20sp"
                  />
              <TextView
                  android:id="@+id/alignment_id"
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
                  android:textColor="@color/colorBackground"
+                 android:textSize="20sp"
                  />
              <TextView
                  android:id="@+id/work_id"
@@ -141,6 +146,7 @@
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
                  android:textColor="@color/colorBackground"
+                 android:textSize="20sp"
                  />
 
              <TextView
@@ -158,6 +164,7 @@
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
                  android:textColor="@color/colorBackground"
+                 android:textSize="20sp"
                  />
 
              <TextView
@@ -165,6 +172,7 @@
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
                  android:textColor="@color/colorBackground"
+                 android:textSize="20sp"
                  />
 
 

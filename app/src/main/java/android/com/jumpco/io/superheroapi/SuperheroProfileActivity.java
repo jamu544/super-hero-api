@@ -1,5 +1,6 @@
 package android.com.jumpco.io.superheroapi;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.MenuItemCompat;
 import retrofit2.Call;
@@ -12,6 +13,7 @@ import android.app.ProgressDialog;
 import android.com.jumpco.io.superheroapi.interfaces.Api2;
 import android.com.jumpco.io.superheroapi.interfaces.RetroFitHelper;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -25,12 +27,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.Target;
 
 import java.util.Locale;
 
@@ -44,6 +52,7 @@ public class SuperheroProfileActivity extends AppCompatActivity  implements View
     private Button searchButton;
     private ProgressDialog progressDialog;
     private EditText searchHero;
+    private ProgressBar progressBarForImage;
     private String name;
 
 
@@ -85,6 +94,7 @@ public class SuperheroProfileActivity extends AppCompatActivity  implements View
         searchButton.setOnClickListener(this);
         searchHero = (EditText) findViewById(R.id.search_hero_id);
         searchHero.addTextChangedListener(this);
+        progressBarForImage = (ProgressBar) findViewById(R.id.progress);
         Log.d(TAG,"On Create - init" );
 
 
@@ -131,6 +141,22 @@ public class SuperheroProfileActivity extends AppCompatActivity  implements View
 
                    Glide.with(context)
                         .load(response.body().image.url)
+                           .apply(new RequestOptions()
+                                   .placeholder(R.color.colorPrimary)
+                                   .dontAnimate().skipMemoryCache(true))
+                           .listener(new RequestListener<Drawable>() {
+                               @Override
+                               public boolean onLoadFailed(@Nullable  GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                                   progressBarForImage.setVisibility(View.GONE);
+                                   return false;
+                               }
+
+                               @Override
+                               public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                                   progressBarForImage.setVisibility(View.GONE);
+                                   return false;
+                               }
+                           })
                         .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                         .into(profileimage);
 

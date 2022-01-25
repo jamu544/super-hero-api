@@ -4,29 +4,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="20dp"
     android:orientation="vertical"
+    android:padding="20dp"
     >
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
 
         <EditText
             android:id="@+id/search_hero_id"
-            android:layout_width="300dp"
-            android:layout_height="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:inputType="text"
             android:hint="@string/search_for_comics"
-
+            android:gravity="center"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
             />
         <Button
             android:id="@+id/button_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:text="SEARCH"
             android:textColor="@color/purple_200"
-
+            android:gravity="center"
             />
-
+    </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -42,6 +48,7 @@
         android:padding="8dp"
         android:weightSum="4"
         >
+
      <androidx.cardview.widget.CardView
          app:cardElevation="10dp"
          android:id="@+id/image_card"
@@ -53,14 +60,18 @@
          >
          <LinearLayout
              android:layout_width="match_parent"
-             android:layout_height="wrap_content"
+             android:layout_height="match_parent"
              android:orientation="vertical">
-
+             <ProgressBar
+                 android:id="@+id/progress"
+                 android:layout_width="match_parent"
+                 android:layout_height="100dp"
+                 android:visibility="visible" />
      <ImageView
         android:id="@+id/profilePhoto"
         android:layout_marginTop="24dp"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="match_parent"
         android:background="#999"
         android:src="@drawable/batman_ben_affleck"
         />
@@ -70,12 +81,11 @@
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
                  android:layout_gravity="center_horizontal"
-                 android:layout_marginTop="20dp"
-                 android:layout_marginBottom="20dp"
                  android:fontFamily="@font/allerta"
                  android:text="Batman"
                  android:textColor="@color/colorBackground"
                  android:textSize="32sp"
+
                  />
          </LinearLayout>
 
@@ -84,11 +94,13 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="horizontal"
             android:padding="8dp"
             android:weightSum="4">
-
+ <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">--
         <androidx.cardview.widget.CardView
          android:id="@+id/biography2_card"
          android:layout_width="600dp"
@@ -102,15 +114,16 @@
          <LinearLayout
              android:layout_width="match_parent"
              android:orientation="vertical"
+             android:layout_marginStart="20dp"
              android:layout_height="wrap_content">
 
              <TextView
                  android:id="@+id/biography_id"
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
-                 android:fontFamily="@font/lateef"
-                 android:textSize="20dp"
-                 android:text="biography"
+                 android:fontFamily="@font/anton"
+                 android:textSize="20sp"
+                 android:text="Biography"
                  android:textColor="#000000" />
 
              <TextView
@@ -127,6 +140,8 @@
                  android:layout_height="wrap_content"
                  android:textColor="@color/colorBackground"
                  android:text="30 November 1989"
+                 android:textSize="20sp"
+                 android:fontFamily="@font/anton"
                  />
              <TextView
                  android:id="@+id/firstAppearance_id"
@@ -134,6 +149,8 @@
                  android:layout_height="wrap_content"
                  android:textColor="@color/colorBackground"
                  android:text="appearance "
+                 android:textSize="20sp"
+                 android:fontFamily="@font/anton"
                  />
              <TextView
                  android:id="@+id/publisher_id"
@@ -141,6 +158,8 @@
                  android:layout_height="wrap_content"
                  android:textColor="@color/colorBackground"
                  android:text=" DC or Marvel"
+                 android:textSize="20sp"
+                 android:fontFamily="@font/anton"
                  />
              <TextView
                  android:id="@+id/alignment_id"
@@ -148,15 +167,17 @@
                  android:layout_height="wrap_content"
                  android:textColor="@color/colorBackground"
                  android:text="with a friend"
+                 android:textSize="20sp"
+                 android:fontFamily="@font/anton"
                  />
              <TextView
                  android:id="@+id/work_id"
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
-                 android:fontFamily="@font/lateef"
-                 android:textSize="20dp"
+                 android:fontFamily="@font/anton"
+                 android:textSize="20sp"
                  android:textColor="#000000"
-                 android:text=" Contract worker"
+                 android:text="Work"
                  />
              <TextView
                  android:id="@+id/occupation_id"
@@ -164,16 +185,19 @@
                  android:layout_height="wrap_content"
                  android:textColor="@color/colorBackground"
                  android:text=" Conflicated "
+                 android:textSize="20sp"
+                 android:fontFamily="@font/anton"
                  />
 
              <TextView
                  android:id="@+id/connection_id"
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
-                 android:fontFamily="@font/lateef"
-                 android:textSize="20dp"
+                 android:fontFamily="@font/anton"
+                 android:textSize="20sp"
                  android:textColor="#000000"
-                 android:text=" DC or Marvel connection"
+                 android:text="Connections"
+
                  />
 
              <TextView
@@ -182,6 +206,8 @@
                  android:layout_height="wrap_content"
                  android:textColor="@color/colorBackground"
                  android:text=" Group affiliation"
+                 android:textSize="20sp"
+                 android:fontFamily="@font/anton"
                  />
 
              <TextView
@@ -190,13 +216,15 @@
                  android:layout_height="wrap_content"
                  android:textColor="@color/colorBackground"
                  android:text=" Captain or Superman"
+                 android:textSize="20sp"
+                 android:fontFamily="@font/anton"
                  />
 
 
          </LinearLayout>
 
      </androidx.cardview.widget.CardView>
-
+        </ScrollView>
        </LinearLayout>
     </LinearLayout>
 </LinearLayout>
