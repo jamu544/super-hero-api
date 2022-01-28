@@ -1,5 +1,6 @@
 package android.com.jumpco.io.superheroapi;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.MenuItemCompat;
@@ -13,6 +14,7 @@ import android.app.ProgressDialog;
 import android.com.jumpco.io.superheroapi.interfaces.Api2;
 import android.com.jumpco.io.superheroapi.interfaces.RetroFitHelper;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -52,7 +54,7 @@ public class SuperheroProfileActivity extends AppCompatActivity  implements View
     private Button searchButton;
     private ProgressDialog progressDialog;
     private EditText searchHero;
-    private ProgressBar progressBarForImage;
+ //   private ProgressBar progressBarForImage;
     private String name;
 
 
@@ -94,7 +96,7 @@ public class SuperheroProfileActivity extends AppCompatActivity  implements View
         searchButton.setOnClickListener(this);
         searchHero = (EditText) findViewById(R.id.search_hero_id);
         searchHero.addTextChangedListener(this);
-        progressBarForImage = (ProgressBar) findViewById(R.id.progress);
+     //   progressBarForImage = (ProgressBar) findViewById(R.id.progress);
         Log.d(TAG,"On Create - init" );
 
 
@@ -141,22 +143,22 @@ public class SuperheroProfileActivity extends AppCompatActivity  implements View
 
                    Glide.with(context)
                         .load(response.body().image.url)
-                           .apply(new RequestOptions()
-                                   .placeholder(R.color.colorPrimary)
-                                   .dontAnimate().skipMemoryCache(true))
-                           .listener(new RequestListener<Drawable>() {
-                               @Override
-                               public boolean onLoadFailed(@Nullable  GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                                   progressBarForImage.setVisibility(View.GONE);
-                                   return false;
-                               }
-
-                               @Override
-                               public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                                   progressBarForImage.setVisibility(View.GONE);
-                                   return false;
-                               }
-                           })
+//                           .apply(new RequestOptions()
+//                                   .placeholder(R.color.colorPrimary)
+//                                   .dontAnimate().skipMemoryCache(true))
+//                           .listener(new RequestListener<Drawable>() {
+//                               @Override
+//                               public boolean onLoadFailed(@Nullable  GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+//                                   progressBarForImage.setVisibility(View.GONE);
+//                                   return false;
+//                               }
+//
+//                               @Override
+//                               public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+//                                   progressBarForImage.setVisibility(View.GONE);
+//                                   return false;
+//                               }
+//                           })
                         .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                         .into(profileimage);
 
@@ -257,5 +259,18 @@ public class SuperheroProfileActivity extends AppCompatActivity  implements View
                     haveConnectedMobile = true;
         }
         return haveConnectionWifi || haveConnectedMobile;
+    }
+
+    //detect Orientation changes
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        //Checks the orientaion of the screen
+        if(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE){
+            Toast.makeText(this, "landscape",Toast.LENGTH_SHORT).show();
+        }
+        else if(newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
+            Toast.makeText(this, "portrait",Toast.LENGTH_SHORT).show();
+        }
     }
 }
