@@ -1,7 +1,8 @@
-package android.com.jumpco.io.superheroapi;
+package android.com.jumpco.io.superheroapi.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.com.jumpco.io.superheroapi.R;
 import android.os.Bundle;
 
 public class SplashActivity extends AppCompatActivity {

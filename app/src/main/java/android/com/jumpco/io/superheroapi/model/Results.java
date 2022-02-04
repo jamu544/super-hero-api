@@ -1,10 +1,6 @@
-package android.com.jumpco.io.superheroapi.pojo;
+package android.com.jumpco.io.superheroapi.model;
 
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
-import java.sql.Array;
-import java.util.ArrayList;
 
 public class Results {
 

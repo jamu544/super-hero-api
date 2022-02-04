@@ -1,4 +1,4 @@
-package android.com.jumpco.io.superheroapi.pojo;
+package android.com.jumpco.io.superheroapi.model;
 
 import android.com.jumpco.io.superheroapi.interfaces.Api;
 

@@ -1,13 +1,11 @@
 package android.com.jumpco.io.superheroapi.interfaces;
 
-import android.com.jumpco.io.superheroapi.pojo.Results;
-import android.com.jumpco.io.superheroapi.pojo.SuperheroResponse;
+import android.com.jumpco.io.superheroapi.model.Results;
 
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
-import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface Api {

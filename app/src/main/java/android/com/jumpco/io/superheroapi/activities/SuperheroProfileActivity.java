@@ -1,7 +1,6 @@
-package android.com.jumpco.io.superheroapi;
+package android.com.jumpco.io.superheroapi.activities;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.MenuItemCompat;
 import retrofit2.Call;
@@ -11,11 +10,12 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import android.app.ProgressDialog;
+import android.com.jumpco.io.superheroapi.R;
 import android.com.jumpco.io.superheroapi.interfaces.Api2;
 import android.com.jumpco.io.superheroapi.interfaces.RetroFitHelper;
+import android.com.jumpco.io.superheroapi.utils.Utilities;
 import android.content.Context;
 import android.content.res.Configuration;
-import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -29,18 +29,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.engine.GlideException;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.RequestOptions;
-import com.bumptech.glide.request.target.Target;
 
 import java.util.Locale;
 
@@ -214,7 +208,7 @@ public class SuperheroProfileActivity extends AppCompatActivity  implements View
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.button_id:
-                if(checkInternetConnectivity()) {
+                if(Utilities.checkInternetConnectivity(context)) {
                     getCurrentHeroInfo(name);
                     Log.i("Info log", "Search Button Clicked");
                 }
@@ -243,23 +237,7 @@ public class SuperheroProfileActivity extends AppCompatActivity  implements View
         name = editable.toString();
     }
 
-    //check internet connection for both MOBILE and WIFI
-    private boolean checkInternetConnectivity(){
-        boolean haveConnectionWifi = false;
-        boolean haveConnectedMobile = false;
-        ConnectivityManager cm =((ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE));
-        NetworkInfo[] networkInfos = cm.getAllNetworkInfo();
 
-        for (NetworkInfo in : networkInfos){
-            if(in.getTypeName().equalsIgnoreCase("WIFI"))
-                if(in.isConnected())
-                    haveConnectionWifi = true;
-            if(in.getTypeName().equalsIgnoreCase("MOBILE"))
-                if(in.isConnected())
-                    haveConnectedMobile = true;
-        }
-        return haveConnectionWifi || haveConnectedMobile;
-    }
 
     //detect Orientation changes
     @Override

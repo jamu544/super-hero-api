@@ -1,6 +1,6 @@
 package android.com.jumpco.io.superheroapi.interfaces;
 
-import android.com.jumpco.io.superheroapi.pojo.SuperheroResponse;
+import android.com.jumpco.io.superheroapi.model.SuperheroResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

@@ -1,7 +1,7 @@
 package android.com.jumpco.io.superheroapi.adapters;
 
 import android.com.jumpco.io.superheroapi.R;
-import android.com.jumpco.io.superheroapi.pojo.SuperheroPojo;
+import android.com.jumpco.io.superheroapi.model.SuperheroPojo;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;

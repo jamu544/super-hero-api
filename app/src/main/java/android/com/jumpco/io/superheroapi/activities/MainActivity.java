@@ -1,4 +1,4 @@
-package android.com.jumpco.io.superheroapi;
+package android.com.jumpco.io.superheroapi.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
@@ -7,17 +7,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 import android.app.ProgressDialog;
+import android.com.jumpco.io.superheroapi.R;
 import android.com.jumpco.io.superheroapi.adapters.SuperheroAdapter;
 import android.com.jumpco.io.superheroapi.adapters.SuperheroListAdapter;
-import android.com.jumpco.io.superheroapi.interfaces.Api2;
-import android.com.jumpco.io.superheroapi.interfaces.RetroFitHelper;
-import android.com.jumpco.io.superheroapi.pojo.Results;
-import android.com.jumpco.io.superheroapi.pojo.RetrofitClient;
-import android.com.jumpco.io.superheroapi.pojo.SuperheroPojo;
+import android.com.jumpco.io.superheroapi.model.Results;
+import android.com.jumpco.io.superheroapi.model.RetrofitClient;
+import android.com.jumpco.io.superheroapi.model.SuperheroPojo;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -27,7 +24,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -37,7 +33,6 @@ import org.jsoup.nodes.Element;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
